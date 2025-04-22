@@ -1,8 +1,45 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model IEnumerable<Agenda.Models.People>
+@{
+    ViewData["Title"] = "List People";
 }
 
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+    <h1 class="display-4">Admin Peoples</h1>
 </div>
+
+<p>
+    <a asp-action="Add" class="btn btn-primary">Add</a>
+</p>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.idCusmtomer)</th>
+            <th>@Html.DisplayNameFor(model => model.Name)</th>
+            <th>@Html.DisplayNameFor(model => model.Firstname)</th>
+            <th>@Html.DisplayNameFor(model => model.Cell)</th>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <th>@Html.DisplayNameFor(model => model.Country)</th>
+            <th>@Html.DisplayNameFor(model => model.CreationDate)</th>
+            <th>Acction</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var i in Model)
+        {
+            <tr>
+                <th>@Html.DisplayFor(modelItem => i.idCusmtomer)</th>
+                <th>@Html.DisplayFor(modelItem => i.Name)</th>
+                <th>@Html.DisplayFor(modelItem => i.Firstname)</th>
+                <th>@Html.DisplayFor(modelItem => i.Cell)</th>
+                <th>@Html.DisplayFor(modelItem => i.Email)</th>
+                <th>@Html.DisplayFor(modelItem => i.Country)</th>
+                <th>@Html.DisplayFor(modelItem => i.CreationDate)</th>
+                <th>
+                    <a asp-action="Edit" asp-route-id="@i.idCusmtomer" class="btn btn-info">Edit</a>
+                    <a asp-action="Delete" asp-route-id="@i.idCusmtomer" class="btn btn-danger">Delete</a>
+                </th>
+            </tr>
+        }
+    </tbody>
+</table>

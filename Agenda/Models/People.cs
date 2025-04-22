@@ -6,8 +6,8 @@ namespace Agenda.Models
     {
         [Key] 
         public int idCusmtomer { get; set; }
-        public string name { get; set; }
-        public string firstName { get; set;}
+        public string Name { get; set; }
+        public string Firstname { get; set;}
         public int Cell { get; set;}
         public string Email { get; set;}
         public string Country { get; set;}

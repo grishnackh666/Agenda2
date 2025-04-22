@@ -1,7 +1,12 @@
+using Agenda.repository;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
+
+//añadir inyeccion de dependecia
+builder.Services.AddScoped<IRepository, Repository>();
 
 var app = builder.Build();
 

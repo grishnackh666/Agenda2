@@ -8,21 +8,16 @@ namespace Agenda.repository
     public class Repository : IRepository
     {
         private readonly IDbConnection _db;
-        public Repository(IConfiguration configuration) => _db = new SqlConnection(configuration.GetConnectionString("ConexionSQLLocalDB"));
+        public Repository(IConfiguration configuration)
+        {
+            _db = new SqlConnection(configuration.GetConnectionString("conexionSql"));
+        }
 
         public People AddPeople(People people)
         {
             var sql = "INSERT INTO people(Name,Firstname,Cell,Email,Country,CreationDate)VALUES(@Name,@Firstname,@Cell,@Email,@Country,@CreationDate)"
             +" SELECT CAST(SCOPE_IDENTITY() as int);";
-            var id = _db.Query<int>(sql, new
-            {
-                people.name,
-                people.firstName,
-                people.Cell,
-                people.Email,
-                people.Country,
-                people.CreationDate
-            }).Single();
+            var id = _db.Query<int>(sql, people).Single();
             people.idCusmtomer = id;
             return people;
         }
@@ -42,7 +37,7 @@ namespace Agenda.repository
         public People GetPeople(int id)
         {
             var sql = "SELECT * FROM people WHERE idCusmtomer=@idCusmtomer";
-            return _db.Query<People>(sql,new {QidCusmtomer=id}).Single();
+            return _db.Query<People>(sql,new {@idCusmtomer=id}).Single();
         }
 
         public People UpdatePeople(People people)
